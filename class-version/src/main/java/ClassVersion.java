@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
 
 /**
  * Created by Administrator on 2015/5/11 15:30.
@@ -24,11 +23,10 @@ public class ClassVersion {
         Collection<File> jarFiles = FileUtils.listFiles(dir, new String[]{"jar"}, true);
         Map<Integer, Set<String>> versionFiles = new TreeMap<Integer, Set<String>>();
         for (File file : jarFiles) {
-            ZipInputStream zip = new ZipInputStream(new FileInputStream(file));
             ZipFile zipFile = new ZipFile(file);
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
             while (entries.hasMoreElements()) {
-                ZipEntry zipEntry =  entries.nextElement();
+                ZipEntry zipEntry = entries.nextElement();
                 if (zipEntry.getName().endsWith("class")) {
                     InputStream inputStream = zipFile.getInputStream(zipEntry);
                     int v = getV(inputStream);
@@ -71,7 +69,7 @@ public class ClassVersion {
 
     private static int getV(InputStream stream) throws IOException {
         byte[] ba = new byte[8];
-        int read = stream.read(ba);
+        stream.read(ba);
         return (int) ba[7];
     }
 

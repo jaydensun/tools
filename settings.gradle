@@ -1,2 +1,6 @@
 rootProject.name = 'tools'
 
+include 'snappy'
+
+include 'class-version'
+

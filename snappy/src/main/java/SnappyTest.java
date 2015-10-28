@@ -72,5 +72,4 @@ public class SnappyTest {
         System.out.println("origin & after is equal:" + Arrays.equals(origin, after));
     }
 
-
 }
