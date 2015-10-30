@@ -4,3 +4,7 @@ include 'snappy'
 
 include 'class-version'
 
+include 'apple'
+
+include 'util'
+

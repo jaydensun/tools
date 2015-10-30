@@ -1,0 +1,6 @@
+dependencies {
+        compile 'org.xerial.snappy:snappy-java:1.1.2'
+        compile 'commons-lang:commons-lang:2.6'
+        compile 'commons-io:commons-io:2.4'
+
+}
