@@ -8,3 +8,5 @@ include 'apple'
 
 include 'util'
 
+include 'sigar'
+
