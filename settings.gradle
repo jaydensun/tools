@@ -10,3 +10,9 @@ include 'util'
 
 include 'sigar'
 
+include 'shell-tool'
+
+include 'codec'
+
+include 'spring'
+

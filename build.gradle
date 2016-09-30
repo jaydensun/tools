@@ -1,6 +1,8 @@
 subprojects {
     apply plugin: 'java'
 
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
     version = '1.0'
 
     repositories {
@@ -8,9 +10,6 @@ subprojects {
     }
 
     dependencies {
-//        compile 'commons-io:commons-io:2.4'
-//        compile 'commons-lang:commons-lang:2.6'
-//        compile 'org.xerial.snappy:snappy-java:1.1.2'
 
     }
 

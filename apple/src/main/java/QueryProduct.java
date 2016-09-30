@@ -21,7 +21,7 @@ public class QueryProduct {
     /**
      * 测试内容
      *
-     * @param args
+     * @param args null
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         SortedMap<String, String> partNames = new TreeMap<>();
