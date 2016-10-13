@@ -13,7 +13,7 @@ import org.springframework.core.Ordered;
 public class TestBeanFactoryPost2 implements BeanFactoryPostProcessor, Ordered {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("调用postProcessBeanFactory");
+        System.out.println("调用postProcessBeanFactory2");
         BeanDefinition bd = beanFactory.getBeanDefinition("person");
         MutablePropertyValues pv =  bd.getPropertyValues();
         String orgValue = pv.getPropertyValue("desc").getValue().toString();
