@@ -9,4 +9,10 @@ public interface ITestDao {
     void query(int id);
 
     void update(long id);
+
+    void saveBatch();
+
+    void saveBatchJdbc();
+
+    void saveBatchSession();
 }

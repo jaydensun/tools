@@ -1,11 +1,13 @@
 package com.jayden;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by Administrator on 2016/9/29.
  */
 public class Animal implements InitializingBean {
+    @Value("${aaa:}")
     String name = "default name";
     String desc = "default desc";
 

@@ -17,4 +17,11 @@ subprojects {
         sourceSets*.java.srcDirs*.each { it.mkdirs() }
         sourceSets*.resources.srcDirs*.each { it.mkdirs() }
     }
+
+    task exportDependencies(type: Copy, dependsOn: [clean,jar]) {
+        destinationDir = buildDir
+        from configurations.compile
+        from libsDir
+        into new File(buildDir, 'dependencies')
+    }
 }

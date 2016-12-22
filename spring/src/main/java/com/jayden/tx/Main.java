@@ -9,11 +9,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans-tx.xml");
-        System.out.println(context.getBeanDefinitionCount());
+//        System.out.println(context.getBeanDefinitionCount());
         ITestDao testDao = context.getBean("testDao", ITestDao.class);
         Test test = new Test(200);
 //        testDao.save(test);
-//        testDao.query(3);
-        testDao.update(3);
+//        int id = 228;
+//        testDao.update(id);
+//        testDao.query(id);
+
+        testDao.saveBatchJdbc();
+        testDao.saveBatchJdbc();
+        testDao.saveBatchJdbc();
+        testDao.saveBatchJdbc();
+//
+//        testDao.saveBatchSession();
+//        testDao.saveBatchSession();
+//        testDao.saveBatchSession();
+
+        testDao.saveBatch();
+        testDao.saveBatch();
+        testDao.saveBatch();
+        testDao.saveBatch();
+
     }
 }

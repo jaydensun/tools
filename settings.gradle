@@ -16,3 +16,11 @@ include 'codec'
 
 include 'spring'
 
+include 'metrics'
+
+include 'webservice'
+
+include 'webservice-server'
+
+include 'serial'
+

@@ -6,6 +6,9 @@
       http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:config.properties"/>
+
     <bean id="person" class="com.jayden.Person" init-method="initMethod">
         <property name="name" value="setter---name"/>
         <property name="desc" value="setter---desc"/>
