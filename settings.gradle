@@ -26,3 +26,5 @@ include 'serial'
 
 include 'mechanism-research:readwritelock'
 
+include 'mechanism-research:innerstaticclass'
+
