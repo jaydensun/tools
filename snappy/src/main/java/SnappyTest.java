@@ -33,6 +33,7 @@ public class SnappyTest {
 
         stream.write(ba);
         stream.flush();
+        System.out.println(arrayOutputStream.size());
         System.out.println("second:\n" + Arrays.toString(arrayOutputStream.toByteArray()));
 
         byte[] origin = ArrayUtils.addAll(ba, ba);
@@ -61,6 +62,7 @@ public class SnappyTest {
 
         stream.write(ba);
         stream.flush();
+        System.out.println(arrayOutputStream.size());
         System.out.println("second:\n" + Arrays.toString(arrayOutputStream.toByteArray()));
 
         byte[] origin = ArrayUtils.addAll(ba, ba);

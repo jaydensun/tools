@@ -16,8 +16,6 @@ include 'codec'
 
 include 'spring'
 
-include 'metrics'
-
 include 'webservice'
 
 include 'webservice-server'
@@ -28,3 +26,4 @@ include 'mechanism-research:readwritelock'
 
 include 'mechanism-research:innerstaticclass'
 
+include 'mechanism-research:metrics'
