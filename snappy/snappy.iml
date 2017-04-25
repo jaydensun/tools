@@ -17,5 +17,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.xerial.snappy:snappy-java:1.1.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-io:commons-io:2.4" level="project" />
+    <orderEntry type="module" module-name="util" exported="" />
   </component>
 </module>
