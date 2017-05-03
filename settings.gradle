@@ -27,3 +27,5 @@ include 'mechanism-research:readwritelock'
 include 'mechanism-research:innerstaticclass'
 
 include 'mechanism-research:metrics'
+
+include 'mechanism-research:completionservice'
