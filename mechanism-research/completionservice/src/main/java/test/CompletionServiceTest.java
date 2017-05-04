@@ -10,8 +10,9 @@ import java.util.concurrent.*;
 public class CompletionServiceTest {
     public static void main(String[] args) throws Exception {
         CompletionService<String> completionService = new ExecutorCompletionService<>(Executors.newFixedThreadPool(10));
-        int group = 3;
-        for (int i = 0; i < group; i++) {
+        int group = 0;
+        for (int i = 0; i < 3; i++) {
+            group += 2;
             for (int j = 0; j < 2; j++) {
                 final int finalI = i;
                 final int finalJ = j;
