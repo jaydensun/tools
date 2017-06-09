@@ -6,7 +6,6 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/13.

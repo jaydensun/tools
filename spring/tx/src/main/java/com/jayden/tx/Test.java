@@ -3,8 +3,6 @@ package com.jayden.tx;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import javax.persistence.*;
-
 
 /**
  * Created by Administrator on 2016/10/13.

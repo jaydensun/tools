@@ -12,24 +12,24 @@ public class Main {
 //        System.out.println(context.getBeanDefinitionCount());
         ITestDao testDao = context.getBean("testDao", ITestDao.class);
         Test test = new Test(200);
-//        testDao.save(test);
+        testDao.save(test);
 //        int id = 228;
 //        testDao.update(id);
 //        testDao.query(id);
 
-        testDao.saveBatchJdbc();
-        testDao.saveBatchJdbc();
-        testDao.saveBatchJdbc();
-        testDao.saveBatchJdbc();
+//        testDao.saveBatchJdbc();
+//        testDao.saveBatchJdbc();
+//        testDao.saveBatchJdbc();
+//        testDao.saveBatchJdbc();
 //
 //        testDao.saveBatchSession();
 //        testDao.saveBatchSession();
 //        testDao.saveBatchSession();
 
-        testDao.saveBatch();
-        testDao.saveBatch();
-        testDao.saveBatch();
-        testDao.saveBatch();
+//        testDao.saveBatch();
+//        testDao.saveBatch();
+//        testDao.saveBatch();
+//        testDao.saveBatch();
 
     }
 }

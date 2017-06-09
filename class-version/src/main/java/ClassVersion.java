@@ -13,9 +13,9 @@ import java.util.zip.ZipFile;
  */
 public class ClassVersion {
     public static void main(String[] args) throws Exception {
-        fileFolderVersion("D:\\work\\svn\\ta\\4-middleware\\CODE\\kafka\\core\\build\\classes\\main");
+//        fileFolderVersion("D:\\work\\svn\\ta\\4-middleware\\CODE\\kafka\\core\\build\\classes\\main");
 
-        libFolderVersion("D:\\work\\svn\\ta\\4-middleware\\CODE\\storm-sample\\libs");
+        libFolderVersion("F:\\download2\\sf-sso-ldap-import-1.2.6\\import\\lib");
     }
 
     public static void libFolderVersion(String folder) throws IOException {

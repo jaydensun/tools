@@ -1,0 +1,33 @@
+apply plugin: 'maven'
+apply plugin: 'java'
+
+jar.baseName = rootProject.name + '-' + jar.baseName
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    maven { url property('mavenUrl') }
+}
+
+group = 'com.sf.wiop.agent'
+version = '1.0'
+
+dependencies {
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile("org.springframework:spring-web:${springVersion}") {
+        exclude module: 'commons-logging', group: 'commons-logging'
+    }
+    compile 'org.slf4j:jcl-over-slf4j:1.7.25'
+    compile 'org.slf4j:log4j-over-slf4j:1.7.12'
+    compile 'org.apache.httpcomponents:httpclient:4.5.3'
+}
+
+uploadArchives.repositories.mavenDeployer {
+    repository(url: property('releaseUploadUrl')) {
+        authentication(userName: property('releaseUploadUserName'), password: property('releaseUploadPassword'))
+    }
+    snapshotRepository(url: property('snapshotUploadUrl')) {
+        authentication(userName: property('snapshotUploadUserName'), password: property('snapshotUploadPassword'))
+    }
+}
