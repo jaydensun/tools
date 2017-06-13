@@ -20,6 +20,8 @@ include 'spring:rest'
 
 include 'spring:tx'
 
+include 'spring:quartz'
+
 include 'webservice'
 
 include 'webservice-server'

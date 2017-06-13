@@ -15,4 +15,6 @@ public interface ITestDao {
     void saveBatchJdbc();
 
     void saveBatchSession();
+
+    void saveMultiTimes(Test test);
 }

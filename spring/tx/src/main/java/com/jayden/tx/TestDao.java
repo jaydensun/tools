@@ -1,5 +1,6 @@
 package com.jayden.tx;
 
+import org.hibernate.FlushMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -10,19 +11,26 @@ import java.sql.PreparedStatement;
 /**
  * Created by Administrator on 2016/10/13.
  */
-@Transactional
+
 public class TestDao extends HibernateDaoSupport implements ITestDao {
 
-//    public static final int DATA_COUNT = 10;
+    //    public static final int DATA_COUNT = 10;
 //    public static final int BATCH_COUNT = 10;
     public static final int DATA_COUNT = 1000;
     public static final int BATCH_COUNT = 20;
 
+    @Transactional
     @Override
     public void save(Test test) {
         getHibernateTemplate().save(test);
-        test.setValue(100);
-        getHibernateTemplate().save(test);
+    }
+
+    @Transactional
+    @Override
+    public void saveMultiTimes(Test test) {
+        for (int i = 0; i < 2; i++) {
+            save(test.copy());
+        }
     }
 
     @Override

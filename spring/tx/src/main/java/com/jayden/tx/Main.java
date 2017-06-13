@@ -12,7 +12,8 @@ public class Main {
 //        System.out.println(context.getBeanDefinitionCount());
         ITestDao testDao = context.getBean("testDao", ITestDao.class);
         Test test = new Test(200);
-        testDao.save(test);
+//        testDao.save(test);
+        testDao.saveMultiTimes(test);
 //        int id = 228;
 //        testDao.update(id);
 //        testDao.query(id);

@@ -1,20 +1,18 @@
 package com.jayden.tx;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
+import javax.persistence.*;
 
 /**
  * Created by Administrator on 2016/10/13.
  */
 @Entity
 @Table(name = "test")
-@GenericGenerator(name = "SEQ_Name", strategy = "sequence", parameters = {@Parameter(name = "sequence", value = "seq_test")})
 public class Test {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_Name")
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+
 
     @Column
     private int value;
@@ -53,5 +51,9 @@ public class Test {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Test copy() {
+        return new Test(value, type);
     }
 }
