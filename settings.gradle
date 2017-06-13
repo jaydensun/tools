@@ -22,6 +22,8 @@ include 'spring:tx'
 
 include 'spring:quartz'
 
+include 'spring:quartz-auto'
+
 include 'webservice'
 
 include 'webservice-server'

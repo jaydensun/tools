@@ -7,4 +7,6 @@ dependencies {
     compile 'org.hibernate:hibernate-core:4.3.7.Final'
     compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
     compile 'org.hibernate.common:hibernate-commons-annotations:4.0.5.Final'
+
+    compile project(':share')
 }

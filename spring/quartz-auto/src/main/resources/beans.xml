@@ -36,13 +36,8 @@
     </bean>
 
     <!-- ======================== 调度工厂 ======================== -->
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="CronTriggerBean"/>
-                <ref bean="CronTriggerBean2"/>
-            </list>
-        </property>
-    </bean>
+    <bean id="defaultScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+
+    <bean class="CronTriggerBeanFactoryPostProcessor"/>
 
 </beans>
