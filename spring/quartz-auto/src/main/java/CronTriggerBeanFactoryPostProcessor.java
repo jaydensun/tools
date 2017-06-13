@@ -18,30 +18,27 @@ public class CronTriggerBeanFactoryPostProcessor implements BeanFactoryPostProce
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        boolean haveCronTriggerFactoryBean = false;
         Map<String, BeanDefinition> schedulerBeanDefinitions = new HashMap<>();
         for (String beanDefinitionName : beanFactory.getBeanDefinitionNames()) {
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanDefinitionName);
-            if (beanDefinition.getBeanClassName().equals(SchedulerFactoryBean.class.getName())) {
-                schedulerBeanDefinitions.put(beanDefinitionName, beanDefinition);
+            try {
+                Class<?> aClass = Class.forName(beanDefinition.getBeanClassName());
+                if (SchedulerFactoryBean.class.isAssignableFrom(aClass)) {
+                    schedulerBeanDefinitions.put(beanDefinitionName, beanDefinition);
+                } else if (CronTriggerFactoryBean.class.isAssignableFrom(aClass)) {
+                    haveCronTriggerFactoryBean = true;
+                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
         if (schedulerBeanDefinitions.isEmpty()) {
-            throw new RuntimeException("no SchedulerFactoryBean found");
-        }
-        if (schedulerBeanDefinitions.size() != 1) {
+            if (haveCronTriggerFactoryBean) {
+                throw new RuntimeException("no SchedulerFactoryBean found");
+            }
+        } else if (schedulerBeanDefinitions.size() != 1) {
             throw new RuntimeException("multi SchedulerFactoryBean found: " + schedulerBeanDefinitions.keySet());
         }
-
-        BeanDefinition schedulerBeanDefinition = schedulerBeanDefinitions.values().iterator().next();
-        List<String> triggerBeanNames = new ArrayList<>();
-        for (String s : beanFactory.getBeanDefinitionNames()) {
-            BeanDefinition beanDefinition = beanFactory.getBeanDefinition(s);
-            if (beanDefinition.getBeanClassName().equals(CronTriggerFactoryBean.class.getName())) {
-                triggerBeanNames.add(s);
-            }
-        }
-        MutablePropertyValues propertyValues = schedulerBeanDefinition.getPropertyValues();
-        ManagedList<BeanReference> list = triggerBeanNames.stream().map(RuntimeBeanReference::new).collect(Collectors.toCollection(ManagedList::new));
-        propertyValues.add("triggers", list);
     }
 }

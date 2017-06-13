@@ -3,6 +3,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="defaultScheduler" class="AutoRegisterSchedulerFactoryBean"/>
+    <bean class="CronTriggerBeanFactoryPostProcessor"/>
+
     <!-- 方式二：使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法-->
     <!-- 定义目标bean和bean中的方法 -->
     <bean id="SpringQtzJob" class="com.ncs.hj.SpringQtz"/>
@@ -36,8 +39,5 @@
     </bean>
 
     <!-- ======================== 调度工厂 ======================== -->
-    <bean id="defaultScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
-
-    <bean class="CronTriggerBeanFactoryPostProcessor"/>
 
 </beans>
