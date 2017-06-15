@@ -8,6 +8,7 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -21,7 +22,9 @@ public class AutoRegisterSchedulerFactoryBean extends SchedulerFactoryBean imple
     public void afterPropertiesSet() throws Exception {
         ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
         Map<String, CronTriggerFactoryBean> beansOfType = listableBeanFactory.getBeansOfType(CronTriggerFactoryBean.class);
-        setTriggers(beansOfType.values().stream().map(CronTriggerFactoryBean::getObject).toArray(Trigger[]::new));
+        Trigger[] triggers = beansOfType.values().stream().map(CronTriggerFactoryBean::getObject).toArray(Trigger[]::new);
+        setTriggers(triggers);
+        logger.info(String.format("trigger count: %s, detail:%s", triggers.length, Arrays.asList(triggers)));
         super.afterPropertiesSet();
     }
 
