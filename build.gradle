@@ -10,7 +10,7 @@ subprojects {
     }
 
     dependencies {
-
+        compile project(':share')
     }
 
     task initSourceFolders {

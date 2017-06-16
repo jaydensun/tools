@@ -14,6 +14,7 @@ public class Main {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
         RestService restService = context.getBean(RestService.class);
         restService.process();
+
         logger.info("progress started!");
     }
 }

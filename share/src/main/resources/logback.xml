@@ -59,7 +59,7 @@
 
     <!-- 鏃ュ織杈撳嚭绾у埆 -->
     <!-- OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL. -->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="DAILYFILE" />
         <appender-ref ref="DAILYFILE_ERROR" />
