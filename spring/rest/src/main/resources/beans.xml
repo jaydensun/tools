@@ -16,18 +16,18 @@
         <!--连接超时时间，毫秒-->
         <property name="connectTimeout" value="5000"/>
         <!--读写超时时间，毫秒-->
-        <property name="readTimeout" value="10000"/>
+        <property name="readTimeout" value="100000"/>
     </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <constructor-arg ref="ky.clientHttpRequestFactory"/>
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="writeAcceptCharset" value="false"/>
-                </bean>
-            </list>
-        </property>
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+                    <!--<property name="writeAcceptCharset" value="false"/>-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</property>-->
     </bean>
 
 
