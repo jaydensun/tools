@@ -6,10 +6,9 @@ import javax.persistence.*;
  * Created by Administrator on 2016/10/13.
  */
 @Entity
-@Table(name = "test")
-public class Test {
+@Table(name = "test2")
+public class Test2 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -19,27 +18,10 @@ public class Test {
     @Column
     private String type;
 
-    public Test() {
-    }
-
-    public Test(Long id, int value) {
-        this.id = id;
-        this.value = value;
-    }
-
-    public Test(int value, String type) {
-        this.value = value;
-        this.type = type;
-    }
-
-    public Test(Long id, int value, String type) {
+    public Test2(long id, int value, String type) {
         this.id = id;
         this.value = value;
         this.type = type;
-    }
-
-    public Test(int id, int value, String type) {
-        this((long) id, value, type);
     }
 
     public void setValue(int value) {
@@ -58,7 +40,4 @@ public class Test {
         this.type = type;
     }
 
-    public Test copy() {
-        return new Test(value, type);
-    }
 }

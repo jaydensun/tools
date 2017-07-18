@@ -16,9 +16,9 @@
         <!--<property name="url" value="jdbc:oracle:thin:@10.202.15.120:1521:oradev"/>-->
         <!--<property name="username" value="jspt"/>-->
         <!--<property name="password" value="jspt"/>-->
-        <property name="url" value="jdbc:mariadb://10.202.15.201:3306/dcp?rewriteBatchedStatements=true&amp;allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
-        <property name="username" value="root"/>
-        <property name="password" value="yZOG4pbWPzQNM"/>
+        <property name="url" value="jdbc:mariadb://10.202.34.32:3306/monitor?rewriteBatchedStatements=true&amp;allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
+        <property name="username" value="mommon"/>
+        <property name="password" value="mommon"/>
         <property name="maxTotal" value="20"/>
         <property name="maxIdle" value="10"/>
         <property name="maxWaitMillis" value="10000"/>
