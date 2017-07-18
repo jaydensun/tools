@@ -24,6 +24,8 @@ include 'spring:quartz'
 
 include 'spring:quartz-auto'
 
+include 'spring:event'
+
 include 'webservice'
 
 include 'webservice-server'
