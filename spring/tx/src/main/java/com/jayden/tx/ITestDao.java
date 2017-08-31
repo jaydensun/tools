@@ -15,12 +15,15 @@ public interface ITestDao {
 
     void clear();
     void clear2();
+    void clear3();
 
     void saveBatchJdbc();
     void saveBatchJdbc2();
+    void saveBatchJdbc3();
 
     void saveBatchSession();
     void saveBatchSession2();
+    void saveBatchSession3();
 
     void saveMultiTimes(Test test);
 

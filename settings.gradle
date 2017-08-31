@@ -45,3 +45,5 @@ include 'mechanism-research:completionservice'
 include 'mechanism-research:curatorframework'
 
 include 'mechanism-research:regex'
+
+include 'mechanism-research:poi'

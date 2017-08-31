@@ -37,7 +37,7 @@ public class IdGenerator {
     private static boolean isWindowsOS() {
         boolean isWindowsOS = false;
         String osName = System.getProperty("os.name");
-        if (osName.toLowerCase().indexOf("windows") > -1) {
+        if (osName.toLowerCase().contains("windows")) {
             isWindowsOS = true;
         }
         return isWindowsOS;

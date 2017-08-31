@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
         RestService restService = context.getBean(RestService.class);
-//        restService.processJson();
-//        restService.processForm();
+        restService.processJson();
+        restService.processForm();
 //        restService.createJson();
-        restService.createForm();
+//        restService.createForm();
 
         logger.info("progress started!");
     }

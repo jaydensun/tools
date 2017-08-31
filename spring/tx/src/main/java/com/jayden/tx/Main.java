@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
-    public static final int LOOP = 2;
+    public static final int LOOP = 5;
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("beans-tx.xml");
@@ -22,30 +22,57 @@ public class Main {
 //        int id = 228;
 //        testDao.update(id);
 //        testDao.query(id);
+////
+        test(testDao, testDao::saveBatch);
+        test(testDao, testDao::saveBatchSession);
+        test(testDao, testDao::saveBatchJdbc);
 
-//        test(testDao, testDao::saveBatch);
-//        test(testDao, testDao::saveBatchSession);
-//        test(testDao, testDao::saveBatchJdbc);
-//
         test2(testDao, testDao::saveBatch2);
-//        test2(testDao, testDao::saveBatchSession2);
-//        test2(testDao, testDao::saveBatchJdbc2);
+        test2(testDao, testDao::saveBatchSession2);
+        test2(testDao, testDao::saveBatchJdbc2);
+
+//        testDao.importRequestLog();
+
+//        test3(testDao, testDao::saveBatchSession3);
+//        test3(testDao, testDao::saveBatchJdbc3);
     }
 
     private static void test(ITestDao testDao, Runnable r) {
         for (int i = 0; i < LOOP; i++) {
             testDao.clear();
+            if (oneLoop()) testDao.count();
+            long start = System.currentTimeMillis();
             r.run();
-//            testDao.count();
+            System.out.println(System.currentTimeMillis() - start);
+            if (oneLoop()) testDao.count();
         }
         System.out.println();
+    }
+
+    private static boolean oneLoop() {
+        return LOOP == 1;
     }
 
     private static void test2(ITestDao testDao, Runnable r) {
         for (int i = 0; i < LOOP; i++) {
             testDao.clear2();
+            if (oneLoop()) testDao.count2();
+            long start = System.currentTimeMillis();
             r.run();
-//            testDao.count2();
+            System.out.println(System.currentTimeMillis() - start);
+            if (oneLoop())  testDao.count2();
+        }
+        System.out.println();
+    }
+
+    private static void test3(ITestDao testDao, Runnable r) {
+        for (int i = 0; i < LOOP; i++) {
+            testDao.clear3();
+            if (oneLoop()) testDao.count2();
+            long start = System.currentTimeMillis();
+            r.run();
+            System.out.println(System.currentTimeMillis() - start);
+            if (oneLoop()) testDao.count2();
         }
         System.out.println();
     }
