@@ -9,10 +9,14 @@
       http://www.springframework.org/schema/tx
       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.jayden" />
+    <context:component-scan base-package="com.jayden.jdbchibernatemix" />
 
-    <bean id="testDao" class="com.jayden.tx.TestDao">
+    <bean id="testDao" class="com.jayden.jdbchibernatemix.TestDao">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="test2Dao" class="com.jayden.jdbchibernatemix.Test2Dao">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
@@ -38,7 +42,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan">
             <array>
-                <value>com.jayden.tx</value>
+                <value>com.jayden</value>
             </array>
         </property>
         <property name="hibernateProperties">
@@ -54,9 +58,15 @@
         </property>
     </bean>
 
-    <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
+
+
+    <!--<bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="sessionFactory" />-->
+    <!--</bean>-->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
     </bean>
+
 
     <!-- 这句话运行在beans.xml配置的类中使用@Transactional来申明事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>

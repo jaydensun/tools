@@ -26,6 +26,8 @@ include 'spring:quartz-auto'
 
 include 'spring:event'
 
+include 'spring:config'
+
 include 'webservice'
 
 include 'webservice-server'
@@ -33,6 +35,8 @@ include 'webservice-server'
 include 'serial'
 
 include 'share'
+
+include 'color-logging'
 
 include 'mechanism-research:readwritelock'
 
@@ -47,3 +51,6 @@ include 'mechanism-research:curatorframework'
 include 'mechanism-research:regex'
 
 include 'mechanism-research:poi'
+
+include 'mechanism-research:xml'
+include 'mechanism-research:jmx'

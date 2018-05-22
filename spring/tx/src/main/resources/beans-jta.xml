@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="testJtaDao" class="com.jayden.jta.TestJtaDao">
+        <property name="dataSource" ref="mysqlJta"/>
+    </bean>
+    <bean id="testJta2Dao" class="com.jayden.jta.TestJta2Dao">
+        <property name="dataSource" ref="oracleJta"/>
+    </bean>
+    <bean id="testJtaBiz" class="com.jayden.jta.TestJtaBiz">
+        <property name="testJtaDao" ref="testJtaDao"/>
+        <property name="testJta2Dao" ref="testJta2Dao"/>
+    </bean>
+
+    <bean id="mysqlJta" class="com.atomikos.jdbc.AtomikosDataSourceBean" init-method="init" destroy-method="close" lazy-init="true">
+        <property name="uniqueResourceName" value="MysqlXADataSource"/>
+        <property name="xaDataSourceClassName" value="org.mariadb.jdbc.MySQLDataSource"/>
+        <property name="xaProperties">
+            <props>
+                <prop key="URL">jdbc:mariadb://10.202.34.32:3306/monitor?rewriteBatchedStatements=true</prop>
+                <prop key="user">mommon</prop>
+                <prop key="password">mommon</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="oracleJta" class="com.atomikos.jdbc.AtomikosDataSourceBean" init-method="init" destroy-method="close" lazy-init="true">
+        <property name="uniqueResourceName" value="OracleXADataSource"/>
+        <property name="xaDataSourceClassName" value="oracle.jdbc.xa.client.OracleXADataSource"/>
+        <property name="xaProperties">
+            <props>
+                <prop key="URL">jdbc:oracle:thin:@10.202.15.120:1521:oradev</prop>
+                <prop key="user">jspt</prop>
+                <prop key="password">jspt</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<bean id="mysqlJta" class="org.apache.commons.dbcp2.BasicDataSource"-->
+          <!--destroy-method="close">-->
+        <!--<property name="url" value="jdbc:mariadb://10.202.34.32:3306/monitor?rewriteBatchedStatements=true&amp;allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>-->
+        <!--<property name="username" value="mommon"/>-->
+        <!--<property name="password" value="mommon"/>-->
+
+        <!--<property name="maxTotal" value="20"/>-->
+        <!--<property name="maxIdle" value="10"/>-->
+        <!--<property name="maxWaitMillis" value="10000"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="oracleJta" class="org.apache.commons.dbcp2.BasicDataSource"-->
+          <!--destroy-method="close">-->
+        <!--<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>-->
+        <!--<property name="url" value="jdbc:oracle:thin:@10.202.15.120:1521:oradev"/>-->
+        <!--<property name="username" value="jspt"/>-->
+        <!--<property name="password" value="jspt"/>-->
+
+        <!--<property name="maxTotal" value="20"/>-->
+        <!--<property name="maxIdle" value="10"/>-->
+        <!--<property name="maxWaitMillis" value="10000"/>-->
+    <!--</bean>-->
+
+    <!-- 这句话运行在beans.xml配置的类中使用@Transactional来申明事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="atomikosTransactionManager"
+          class="com.atomikos.icatch.jta.UserTransactionManager"
+          init-method="init" destroy-method="close">
+        <property name="forceShutdown" value="true"/>
+    </bean>
+    <bean id="atomikosUserTransaction"
+          class="com.atomikos.icatch.jta.UserTransactionImp">
+        <property name="transactionTimeout" value="240"/>
+    </bean>
+    <bean id="transactionManager"
+          class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="transactionManager" ref="atomikosTransactionManager"/>
+        <property name="userTransaction" ref="atomikosUserTransaction"/>
+    </bean>
+</beans>

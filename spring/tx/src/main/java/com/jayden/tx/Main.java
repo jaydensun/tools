@@ -21,7 +21,7 @@ public class Main {
 //        testDao.saveMultiTimes(test);
 //        int id = 228;
 //        testDao.update(id);
-//        testDao.query(id);
+//        testDao.insert(id);
 ////
         test(testDao, testDao::saveBatch);
         test(testDao, testDao::saveBatchSession);

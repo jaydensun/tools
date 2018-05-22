@@ -9,10 +9,14 @@
       http://www.springframework.org/schema/tx
       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.jayden" />
+    <context:component-scan base-package="com.jayden.multidbonetx" />
 
-    <bean id="testDao" class="com.jayden.tx.TestDao">
+    <bean id="testDao" class="com.jayden.multidbonetx.TestDao">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="test2Dao" class="com.jayden.multidbonetx.Test2Dao">
+        <property name="sessionFactory" ref="sessionFactory2"/>
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
@@ -36,6 +40,45 @@
 
     <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan">
+            <array>
+                <value>com.jayden.tx</value>
+            </array>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>-->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.connection.characterEncoding">UTF8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource2" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <!--<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>-->
+        <!--<property name="url" value="jdbc:oracle:thin:@10.202.15.120:1521:oradev"/>-->
+        <!--<property name="username" value="jspt"/>-->
+        <!--<property name="password" value="jspt"/>-->
+        <property name="url" value="jdbc:mariadb://10.202.34.32:3306/mindoc_db?rewriteBatchedStatements=true&amp;allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>
+        <property name="username" value="mommon"/>
+        <property name="password" value="mommon"/>
+
+        <!--<property name="url" value="jdbc:mariadb://10.202.45.243:3306/air?rewriteBatchedStatements=true&amp;allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF8"/>-->
+        <!--<property name="username" value="air"/>-->
+        <!--<property name="password" value="passwd123"/>-->
+
+        <property name="maxTotal" value="20"/>
+        <property name="maxIdle" value="10"/>
+        <property name="maxWaitMillis" value="10000"/>
+    </bean>
+
+    <bean name="sessionFactory2" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource2" />
         <property name="packagesToScan">
             <array>
                 <value>com.jayden.tx</value>

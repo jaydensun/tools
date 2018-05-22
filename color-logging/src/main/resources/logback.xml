@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="300 seconds" debug="false">
+    <!--瀹氫箟鏃ュ織鏂囦欢鐨勫瓨鍌ㄥ湴鍧� 鍕垮湪 LogBack 鐨勯厤缃腑浣跨敤鐩稿璺緞-->
+    <property name="LOG_HOME" value="../logs" />
+
+    <!--鏍煎紡鍖栬緭鍑猴細%d琛ㄧず鏃ユ湡锛�%thread琛ㄧず绾跨▼鍚嶏紝%-5level锛氱骇鍒粠宸︽樉绀�5涓瓧绗﹀搴�%msg锛氭棩蹇楁秷鎭紝%n鏄崲琛岀-->
+    <!--鍙傝�僣h.qos.logback.classic.PatternLayout -->
+    <!--  property name="LOG_FORMAT" value="%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %class.%method\\(%F:%L\\) - %msg%n" / -->
+    <property name="LOG_FORMAT" value="%d{MM-dd HH:mm:ss.SSS}|%-5level|%thread| %c{1}.%method\\(%F:%L\\)|%msg%n" />
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+
+    <!-- 鎺у埗鍙拌緭鍑� -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 鏃ュ織杈撳嚭缂栫爜 -->
+        <encoder charset="UTF-8" >
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 鎸夌収姣忓ぉ鐢熸垚鏃ュ織鏂囦欢 -->
+    <appender name="DAILYFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder charset="UTF-8">
+            <pattern>${LOG_FORMAT}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--鏃ュ織鏂囦欢杈撳嚭鐨勬枃浠跺悕-->
+            <fileNamePattern>${LOG_HOME}/dcp_%d{yyyyMMdd}_${dcp_node_tag}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--鏃ュ織鏂囦欢鏈�澶х殑澶у皬 鍗曚綅 kb  mb gb-->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 鏈�澶氫繚瀛樼殑鍘嗗彶澶╂暟 -->
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="DAILYFILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 鏃ュ織绾у埆杩囨护锛氬鍔爁ilter瀛愭爣绛撅紝瀹炵幇鎸夋棩蹇楄緭鍑虹骇鍒繘琛屾棩蹇楁枃浠� ThresholdFilter -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder charset="UTF-8">
+            <pattern>${LOG_FORMAT}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--鏃ュ織鏂囦欢杈撳嚭鐨勬枃浠跺悕-->
+            <fileNamePattern>${LOG_HOME}/dcp_%d{yyyyMMdd}_${dcp_node_tag}_ERROR.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--鏃ュ織鏂囦欢鏈�澶х殑澶у皬 鍗曚綅 kb  mb gb-->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 鏈�澶氫繚瀛樼殑鍘嗗彶澶╂暟 -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- logger name="org.hibernate.SQL" level="DEBUG" /-->
+    <logger name="com.datastax.driver.core.Cluster" level="ERROR"/>
+
+    <!-- 鏃ュ織杈撳嚭绾у埆 -->
+    <!-- OFF, ERROR, WARN, INFO, DEBUG, TRACE, ALL. -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="DAILYFILE" />
+        <appender-ref ref="DAILYFILE_ERROR" />
+    </root>
+
+</configuration>
