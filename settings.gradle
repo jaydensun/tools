@@ -54,3 +54,4 @@ include 'mechanism-research:poi'
 
 include 'mechanism-research:xml'
 include 'mechanism-research:jmx'
+include 'mechanism-research:lock'
